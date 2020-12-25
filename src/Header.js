@@ -12,6 +12,8 @@ import HeaderOption from './HeaderOption.js';
 import { useDispatch } from 'react-redux';
 import { logout } from './features/userSlice';
 import { auth } from './Firebase';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 function Header() {
 
     const dispatch = useDispatch();
@@ -19,6 +21,15 @@ function Header() {
         dispatch(logout());
         auth.signOut();
     }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
     return (
         <div className="header">
             <div className="header__left">
@@ -34,7 +45,16 @@ function Header() {
                 <HeaderOption Icon={WorkIcon} title="Jobs"/>
                 <HeaderOption Icon={SmsRoundedIcon} title="Messaging"/>
                 <HeaderOption Icon={NotificationsIcon} title="Notifications"/>
-                <HeaderOption onClick={logOutApp} avatar={true} title="Me"/>
+                <HeaderOption aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} avatar={true} title="Me"/>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    >
+                    <MenuItem onClick={logOutApp}>Logout</MenuItem>
+                </Menu>
                 
             </div>
             <div className="header__last">
