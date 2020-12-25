@@ -6,12 +6,11 @@ import WorkIcon from '@material-ui/icons/Work';
 import SmsRoundedIcon from '@material-ui/icons/SmsRounded';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AppsIcon from '@material-ui/icons/Apps';
-
+import CardMembershipIcon from '@material-ui/icons/CardMembership';
 import './Header.css';
 import HeaderOption from './HeaderOption.js';
-import App from './App';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectUser } from './features/userSlice';
+import { useDispatch } from 'react-redux';
+import { logout } from './features/userSlice';
 import { auth } from './Firebase';
 function Header() {
 
@@ -40,7 +39,7 @@ function Header() {
             </div>
             <div className="header__last">
             <HeaderOption Icon={AppsIcon} title="Work"/>
-            <HeaderOption title="Try Premium Free For 1 Month"/>
+            <HeaderOption Icon={CardMembershipIcon} title="Try Premium Free For 1 Month"/>
             </div>
         </div>
     )
