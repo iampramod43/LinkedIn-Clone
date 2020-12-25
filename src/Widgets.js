@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 import './Widgets.css'
 import InfoIcon from '@material-ui/icons/Info';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-const url = 'http://newsapi.org/v2/top-headlines?' +
-          'country=us&' +
-          'apiKey=230d0079b7d84709b47b77663cc48cf6';
+import { useSelector } from 'react-redux';
+import { selectCountry } from './features/countrySlice';
 function Widgets() {
+    const country = useSelector(selectCountry);
     const [news, setNews] = useState([]);
-    useEffect(() => {
-        fetch(url).then(res => res.json()).then(
-            (result) => {
-                setNews(result.articles);
-            },
-            (error) => {
-                return alert(error);
-            }
-        );
+    useEffect(() => {  
+        fetch(country.countryNews).then(res => res.json()).then(
+                (result) => {
+                    setNews(result.articles);
+                },
+                (error) => {
+                    return alert(error);
+                }
+            );
     }, []);
     
     const newsArticle = (heading, subtitle, link) => (

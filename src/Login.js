@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCountry, update } from './features/countrySlice';
 import { login } from './features/userSlice';
 import { auth } from './Firebase'
 import './Login.css'
@@ -11,6 +12,19 @@ function Login() {
     const [name, setName] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
     const dispatch = useDispatch();
+    useEffect(() => {
+      fetch('https://ipapi.co/json/').then(res => res.json()).then(
+              (result) => {
+                  dispatch(update({
+                    country: result.country_code,
+                    countryNews: "https://newsapi.org/v2/top-headlines?country=" + result.country_code + "&apiKey=230d0079b7d84709b47b77663cc48cf6",
+                  }));
+              },
+              (error) => {
+                  return alert(error);
+              }
+              );
+    }, []);
     const register = (e) => {
         if (!name) {
             return alert("Please enter your full name");

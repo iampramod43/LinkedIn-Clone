@@ -9,6 +9,7 @@ import { login, logout, selectUser } from './features/userSlice';
 import Login from './Login';
 import { auth } from './Firebase';
 import Widgets from './Widgets';
+import { selectCountry } from './features/countrySlice';
 function App() {
 
   const user = useSelector(selectUser);
