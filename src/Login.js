@@ -17,7 +17,7 @@ function Login() {
               (result) => {
                   dispatch(update({
                     country: result.country_code,
-                    countryNews: "https://newsapi.org/v2/top-headlines?country=" + result.country_code + "&apiKey=230d0079b7d84709b47b77663cc48cf6",
+                    countryNews: "https://saurav.tech/NewsAPI/top-headlines/category/technology/" + result.country_code.toLowerCase() + ".json",
                   }));
               },
               (error) => {
